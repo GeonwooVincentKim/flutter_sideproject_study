@@ -16,9 +16,7 @@ class Body extends StatelessWidget {
     if (index == 0) {
       return Home(pageId: getTitleText[0]);
     } if (index == 1) {
-      return PageA(pageId: getTitleText[1]);
-    } if (index == 2) {
-      return PageB(pageId: getTitleText[2]);
+      return PageA(pageId: getTitleText[1], color: Colors.black);
     } else {
       return Home(pageId: getTitleText[0]);
     }
