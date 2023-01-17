@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:yein_design_app/app_screens/home.dart';
 import 'package:yein_design_app/app_screens/page_a.dart';
 import 'package:yein_design_app/app_screens/page_b.dart';

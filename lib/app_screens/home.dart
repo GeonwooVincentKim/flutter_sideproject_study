@@ -17,6 +17,7 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<RadioStyle> topRadio = [];
   List<RadioStyle> bottomRadio = [];
+
   int topId = 1;
   int bottomId = 1;
   String radioButtonItem = "ONE";
@@ -51,7 +52,7 @@ class _HomeState extends State<Home> {
           children: [
             Row(
               children: [
-                _widgetSizedTextBox(context, true),
+                _widgetSizedTextBoxTop(context, true, topId),
                 Radio(
                   value: topRadio[0].value,
                   groupValue: topId,
@@ -85,7 +86,7 @@ class _HomeState extends State<Home> {
             const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
             Row(
               children: [
-                _widgetSizedTextBox(context, false),
+                _widgetSizedTextBoxBottom(context, false, bottomId),
                 Radio(
                   value: bottomRadio[0].value,
                   groupValue: bottomId,
@@ -101,7 +102,7 @@ class _HomeState extends State<Home> {
                   bottomRadio[0].contents,
                 ),
                 Radio(
-                  value: topRadio[1].value,
+                  value: bottomRadio[1].value,
                   groupValue: bottomId,
                   onChanged: (value) {
                     setState(() {
@@ -122,15 +123,28 @@ class _HomeState extends State<Home> {
     ); 
   }
 
-  SizedBox _widgetSizedTextBox(BuildContext context, isFirst) {
-    return isFirst ? SizedBox(
-      width: MediaQuery.of(context).size.width / textButtonWidth,
-      height: MediaQuery.of(context).size.height / textButtonHeight,  
-      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA",)
-    ) : SizedBox(
+  SizedBox _widgetSizedTextBoxTop(BuildContext context, isFirst, radioInfo) {
+    // return isFirst ? SizedBox(
+    //   width: MediaQuery.of(context).size.width / textButtonWidth,
+    //   height: MediaQuery.of(context).size.height / textButtonHeight,  
+    //   child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioInfo)
+    // ) : SizedBox(
+    //   width: MediaQuery.of(context).size.width / textButtonWidth,
+    //   height: MediaQuery.of(context).size.height / textButtonHeight,
+    //   child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioInfo,)
+    // );
+    return SizedBox(
       width: MediaQuery.of(context).size.width / textButtonWidth,
       height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB",)
+      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioInfo)
+    );
+  }
+
+  SizedBox _widgetSizedTextBoxBottom(BuildContext context, isFirst, radioInfo) {
+    return SizedBox(
+      width: MediaQuery.of(context).size.width / textButtonWidth,
+      height: MediaQuery.of(context).size.height / textButtonHeight,
+      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioInfo,)
     );
   }
 }
