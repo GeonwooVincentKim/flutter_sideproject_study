@@ -24,8 +24,8 @@ class MyApp extends StatelessWidget {
         initialRoute: "/",
         routes: {
           "/": (context) => const Body(index: 0),
-          "/pageA": (context) => const PageA(pageId: '', color: Colors.black),
-          // "/pageB": (context) => const PageB(pageId: ''),
+          "/pageA": (context) => const PageA(pageId: ''),
+          "/pageB": (context) => const PageB(pageId: ''),
         },
         onGenerateRoute: (settings) {
           final List<String> pathElements = settings.name!.split("/");
@@ -33,15 +33,15 @@ class MyApp extends StatelessWidget {
           if (pathElements[0] != '') return null;
           if (pathElements[1] == 'pageA') {
             String pageA = pathElements[2];
-            return MaterialPageRoute(builder: (context) => PageA(pageId: pageA, color: Colors.black,), settings: settings);
+            return MaterialPageRoute(builder: (context) => PageA(pageId: pageA), settings: settings);
             // return CupertinoPageRoute(builder: (context) => PageA(pageId: pageA), settings: settings);
           }
 
-          // if (pathElements[2] == 'pageB') {
-          //   String pageB = pathElements[2];
-          //   return MaterialPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
-          //   // return CupertinoPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
-          // }
+          if (pathElements[2] == 'pageB') {
+            String pageB = pathElements[2];
+            return MaterialPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
+            // return CupertinoPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
+          }
         },
       )
     );

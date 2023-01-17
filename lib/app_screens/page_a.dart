@@ -6,8 +6,7 @@ import 'package:yein_design_app/provider/radio_style_provider.dart';
 
 class PageA extends StatefulWidget {
   final String pageId;
-  final Color color;
-  const PageA({super.key, required this.pageId, required this.color});
+  const PageA({super.key, required this.pageId});
 
   @override
   State<PageA> createState() => _PageAState();

@@ -62,7 +62,6 @@ class _HomeState extends State<Home> {
                     setState(() {
                       topRadio[0].contents;
                       topRadio[0].color;
-                      print(topRadio[0].color);
                       topId = topRadio[0].value;
                     });
                   },
@@ -87,39 +86,39 @@ class _HomeState extends State<Home> {
               ],
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
-            // Row(
-            //   children: [
-            //     // _widgetSizedTextBoxBottom(context, false, bottomRadio),
-            //     Radio(
-            //       value: bottomRadio[0].value,
-            //       groupValue: bottomId,
-            //       onChanged: (value) {
-            //         setState(() {
-            //           bottomRadio[0].contents;
-            //           bottomRadio[0].color;
-            //           bottomId = bottomRadio[0].value;
-            //         });
-            //       },
-            //     ),
-            //     Text(
-            //       bottomRadio[0].contents,
-            //     ),
-            //     Radio(
-            //       value: bottomRadio[1].value,
-            //       groupValue: bottomId,
-            //       onChanged: (value) {
-            //         setState(() {
-            //           bottomRadio[1].contents;
-            //           bottomRadio[1].color;
-            //           bottomId = bottomRadio[1].value;
-            //         });
-            //       },
-            //     ),
-            //     Text(
-            //       bottomRadio[1].contents,
-            //     )
-            //   ],
-            // ),
+            Row(
+              children: [
+                _widgetSizedTextBoxBottom(context, false, bottomId),
+                Radio(
+                  value: bottomRadio[0].value,
+                  groupValue: bottomId,
+                  onChanged: (value) {
+                    setState(() {
+                      bottomRadio[0].contents;
+                      bottomRadio[0].color;
+                      bottomId = bottomRadio[0].value;
+                    });
+                  },
+                ),
+                Text(
+                  bottomRadio[0].contents,
+                ),
+                Radio(
+                  value: bottomRadio[1].value,
+                  groupValue: bottomId,
+                  onChanged: (value) {
+                    setState(() {
+                      bottomRadio[1].contents;
+                      bottomRadio[1].color;
+                      bottomId = bottomRadio[1].value;
+                    });
+                  },
+                ),
+                Text(
+                  bottomRadio[1].contents,
+                )
+              ],
+            ),
           ],
         )
       ),
