@@ -20,7 +20,6 @@ class _HomeState extends State<Home> {
 
   int topId = 1;
   int bottomId = 1;
-  String radioButtonItem = "ONE";
 
   @override
   void initState() {
@@ -53,49 +52,22 @@ class _HomeState extends State<Home> {
             Row(
               children: [
                 _widgetSizedTextBox(context, true, topId),
-                _widgetCustomRadio(0),
-                Text(
-                  topRadio[0].contents,
-                ),
-                _widgetCustomRadio(1),
-
-                Text(
-                  topRadio[1].contents,
-                )
+                _widgetCustomRadioTop(0),
+                Text(topRadio[0].contents),
+                
+                _widgetCustomRadioTop(1),
+                Text(topRadio[1].contents)
               ],
             ),
             const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
             Row(
               children: [
-                _widgetSizedTextBox(context, true, bottomId),
-                Radio(
-                  value: bottomRadio[0].value,
-                  groupValue: bottomId,
-                  onChanged: (value) {
-                    setState(() {
-                      bottomRadio[0].contents;
-                      bottomRadio[0].color;
-                      bottomId = bottomRadio[0].value;
-                    });
-                  },
-                ),
-                Text(
-                  bottomRadio[0].contents,
-                ),
-                Radio(
-                  value: bottomRadio[1].value,
-                  groupValue: bottomId,
-                  onChanged: (value) {
-                    setState(() {
-                      bottomRadio[1].contents;
-                      bottomRadio[1].color;
-                      bottomId = bottomRadio[1].value;
-                    });
-                  },
-                ),
-                Text(
-                  bottomRadio[1].contents,
-                )
+                _widgetSizedTextBox(context, false, bottomId),
+                _widgetCustomRadioBottom(0),
+                Text(bottomRadio[0].contents,),
+                
+                _widgetCustomRadioBottom(1),
+                Text(bottomRadio[1].contents,)
               ],
             ),
           ],
@@ -104,7 +76,21 @@ class _HomeState extends State<Home> {
     ); 
   }
 
-  Radio<int> _widgetCustomRadio(index) {
+  Radio<int> _widgetCustomRadioBottom(index) {
+    return Radio(
+      value: bottomRadio[index].value,
+      groupValue: bottomId,
+      onChanged: (value) {
+        setState(() {
+          bottomRadio[index].contents;
+          bottomRadio[index].color;
+          bottomId = bottomRadio[index].value;
+        });
+      },
+    );
+  }
+
+  Radio<int> _widgetCustomRadioTop(index) {
     return Radio(
       value: topRadio[index].value,
       groupValue: topId,
@@ -122,11 +108,11 @@ class _HomeState extends State<Home> {
     return isTop ? SizedBox(
       width: MediaQuery.of(context).size.width / textButtonWidth,
       height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioId)
+      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioId, isCurrentPage: false)
     ) : SizedBox(
       width: MediaQuery.of(context).size.width / textButtonWidth,
       height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioId)
+      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioId, isCurrentPage: false)
     );
   }
 }
