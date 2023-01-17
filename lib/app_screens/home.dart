@@ -45,39 +45,6 @@ class _HomeState extends State<Home> {
       ),
       body: Container(
         padding: paddingSymmetricBig,
-        // child: Consumer<RadioStyleProvider> (
-        //   builder: (context, customStyle, _) {
-        //     final List<RadioStyle> listStyle = customStyle.radioStyle;
-        //     topRadio = listStyle.toList();
-            
-        //     return Column(
-        //       children: [
-        //         Row(
-        //           children: [
-        //             _widgetSizedTextBox(context),
-        //             Radio(
-        //               value: topRadio[0].value,
-        //               groupValue: id,
-        //               onChanged: (val) {
-        //                 setState(() {
-        //                   topRadio[0].contents = "RED";
-        //                   id = topRadio[0].value;
-        //                 });
-        //               },
-        //             ),
-        //           ],
-        //         )
-                
-        //         // Row(
-        //         //   children: [
-                    
-        //         //   ],
-        //         // )
-        //       ],
-        //     );
-        //   },
-        // )
-        
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
