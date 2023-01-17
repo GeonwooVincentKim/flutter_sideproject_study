@@ -5,7 +5,6 @@ import 'package:yein_design_app/model/radio_style.dart';
 import 'package:yein_design_app/provider/radio_style_provider.dart';
 import 'package:yein_design_app/shared/style.dart';
 import 'package:yein_design_app/widgets/cupertino_button.dart';
-import 'package:yein_design_app/widgets/text_button.dart';
 
 class Home extends StatefulWidget {
   final String pageId;
@@ -15,51 +14,156 @@ class Home extends StatefulWidget {
   State<Home> createState() => _HomeState();
 }
 
-enum ColorValues {R, G}
-
 class _HomeState extends State<Home> {
-  List<String> valueTitle = ['Red', 'Green'];
-  List<RadioStyle> radioStyleList = List.empty(growable: true); 
+  List<RadioStyle> topRadio = [];
+  List<RadioStyle> bottomRadio = [];
+  int topId = 1;
+  int bottomId = 1;
+  String radioButtonItem = "ONE";
 
   @override
   void initState() {
     setState(() {
-      radioStyleList = Provider.of<RadioStyleProvider>(context, listen: false).radioStyle;
+      topRadio = Provider.of<RadioStyleProvider>(context, listen: false).radioStyle;
+      bottomRadio = Provider.of<RadioStyleProvider>(context, listen: false).radioStyle;
     });
 
     super.initState();
   }
 
+
   @override
   Widget build(BuildContext context) {
-    return CupertinoPageScaffold(
-      navigationBar: CupertinoNavigationBar(
-        middle: Text(widget.pageId, textAlign: TextAlign.center, style: const TextStyle(color: CupertinoColors.white, fontSize: 25)),
+    return Scaffold(
+      // navigationBar: CupertinoNavigationBar(
+      //   middle: Text(widget.pageId, textAlign: TextAlign.center, style: const TextStyle(color: CupertinoColors.white, fontSize: 25)),
+      //   backgroundColor: CupertinoColors.black,
+      // ),
+      appBar: AppBar(
         backgroundColor: CupertinoColors.black,
+        title: Text(widget.pageId, textAlign: TextAlign.center, style: const TextStyle(color: CupertinoColors.white, fontSize: 25)), 
       ),
-      child: Container(
+      body: Container(
         padding: paddingSymmetricBig,
-        child: Column(
-          children: [
-            _widgetSizedTextBox(context),
+        // child: Consumer<RadioStyleProvider> (
+        //   builder: (context, customStyle, _) {
+        //     final List<RadioStyle> listStyle = customStyle.radioStyle;
+        //     topRadio = listStyle.toList();
             
-            // Row(
-            //   children: [
+        //     return Column(
+        //       children: [
+        //         Row(
+        //           children: [
+        //             _widgetSizedTextBox(context),
+        //             Radio(
+        //               value: topRadio[0].value,
+        //               groupValue: id,
+        //               onChanged: (val) {
+        //                 setState(() {
+        //                   topRadio[0].contents = "RED";
+        //                   id = topRadio[0].value;
+        //                 });
+        //               },
+        //             ),
+        //           ],
+        //         )
                 
-            //   ],
-            // )
+        //         // Row(
+        //         //   children: [
+                    
+        //         //   ],
+        //         // )
+        //       ],
+        //     );
+        //   },
+        // )
+        
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                _widgetSizedTextBox(context, true),
+                Radio(
+                  value: topRadio[0].value,
+                  groupValue: topId,
+                  onChanged: (value) {
+                    setState(() {
+                      topRadio[0].contents;
+                      topRadio[0].color;
+                      topId = topRadio[0].value;
+                    });
+                  },
+                ),
+                Text(
+                  topRadio[0].contents,
+                ),
+                Radio(
+                  value: topRadio[1].value,
+                  groupValue: topId,
+                  onChanged: (value) {
+                    setState(() {
+                      topRadio[1].contents;
+                      topRadio[1].color;
+                      topId = topRadio[1].value;
+                    });
+                  },
+                ),
+                Text(
+                  topRadio[1].contents,
+                )
+              ],
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
+            Row(
+              children: [
+                _widgetSizedTextBox(context, false),
+                Radio(
+                  value: bottomRadio[0].value,
+                  groupValue: bottomId,
+                  onChanged: (value) {
+                    setState(() {
+                      bottomRadio[0].contents;
+                      bottomRadio[0].color;
+                      bottomId = bottomRadio[0].value;
+                    });
+                  },
+                ),
+                Text(
+                  bottomRadio[0].contents,
+                ),
+                Radio(
+                  value: topRadio[1].value,
+                  groupValue: bottomId,
+                  onChanged: (value) {
+                    setState(() {
+                      bottomRadio[1].contents;
+                      bottomRadio[1].color;
+                      bottomId = bottomRadio[1].value;
+                    });
+                  },
+                ),
+                Text(
+                  bottomRadio[1].contents,
+                )
+              ],
+            ),
           ],
         )
       ),
     ); 
   }
 
-  SizedBox _widgetSizedTextBox(BuildContext context) {
-    return SizedBox(
+  SizedBox _widgetSizedTextBox(BuildContext context, isFirst) {
+    return isFirst ? SizedBox(
+      width: MediaQuery.of(context).size.width / textButtonWidth,
+      height: MediaQuery.of(context).size.height / textButtonHeight,  
+      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA",)
+    ) : SizedBox(
       width: MediaQuery.of(context).size.width / textButtonWidth,
       height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA",)
-      // child: CustomTextButton(getTitleText: getTitleText[1], routerName: "/pageA",)
+      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB",)
     );
   }
 }

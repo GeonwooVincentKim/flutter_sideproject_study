@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yein_design_app/app_screens/body.dart';
 import 'package:yein_design_app/app_screens/page_a.dart';
@@ -16,9 +17,10 @@ class MyApp extends StatelessWidget {
       providers: [
         ChangeNotifierProvider(create: (ctx) => RadioStyleProvider())
       ],
-      child: CupertinoApp(
+      child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        theme: const CupertinoThemeData(brightness: Brightness.light),
+        theme: ThemeData(brightness: Brightness.light),
+        // theme: const CupertinoThemeData(brightness: Brightness.light),
         initialRoute: "/",
         routes: {
           "/": (context) => const Body(index: 0),
@@ -31,12 +33,14 @@ class MyApp extends StatelessWidget {
           if (pathElements[0] != '') return null;
           if (pathElements[1] == 'pageA') {
             String pageA = pathElements[2];
-            return CupertinoPageRoute(builder: (context) => PageA(pageId: pageA), settings: settings);
+            return MaterialPageRoute(builder: (context) => PageA(pageId: pageA), settings: settings);
+            // return CupertinoPageRoute(builder: (context) => PageA(pageId: pageA), settings: settings);
           }
 
           if (pathElements[2] == 'pageB') {
             String pageB = pathElements[2];
-            return CupertinoPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
+            return MaterialPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
+            // return CupertinoPageRoute(builder: (context) => PageB(pageId: pageB), settings: settings);
           }
         },
       )
