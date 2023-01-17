@@ -52,32 +52,13 @@ class _HomeState extends State<Home> {
           children: [
             Row(
               children: [
-                _widgetSizedTextBoxTop(context, true, topId),
-                Radio(
-                  value: topRadio[0].value,
-                  groupValue: topId,
-                  onChanged: (value) {
-                    setState(() {
-                      topRadio[0].contents;
-                      topRadio[0].color;
-                      topId = topRadio[0].value;
-                    });
-                  },
-                ),
+                _widgetSizedTextBox(context, true, topId),
+                _widgetCustomRadio(0),
                 Text(
                   topRadio[0].contents,
                 ),
-                Radio(
-                  value: topRadio[1].value,
-                  groupValue: topId,
-                  onChanged: (value) {
-                    setState(() {
-                      topRadio[1].contents;
-                      topRadio[1].color;
-                      topId = topRadio[1].value;
-                    });
-                  },
-                ),
+                _widgetCustomRadio(1),
+
                 Text(
                   topRadio[1].contents,
                 )
@@ -86,7 +67,7 @@ class _HomeState extends State<Home> {
             const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
             Row(
               children: [
-                _widgetSizedTextBoxBottom(context, false, bottomId),
+                _widgetSizedTextBox(context, true, bottomId),
                 Radio(
                   value: bottomRadio[0].value,
                   groupValue: bottomId,
@@ -123,28 +104,29 @@ class _HomeState extends State<Home> {
     ); 
   }
 
-  SizedBox _widgetSizedTextBoxTop(BuildContext context, isFirst, radioInfo) {
-    // return isFirst ? SizedBox(
-    //   width: MediaQuery.of(context).size.width / textButtonWidth,
-    //   height: MediaQuery.of(context).size.height / textButtonHeight,  
-    //   child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioInfo)
-    // ) : SizedBox(
-    //   width: MediaQuery.of(context).size.width / textButtonWidth,
-    //   height: MediaQuery.of(context).size.height / textButtonHeight,
-    //   child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioInfo,)
-    // );
-    return SizedBox(
-      width: MediaQuery.of(context).size.width / textButtonWidth,
-      height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioInfo)
+  Radio<int> _widgetCustomRadio(index) {
+    return Radio(
+      value: topRadio[index].value,
+      groupValue: topId,
+      onChanged: (value) {
+        setState(() {
+          topRadio[index].contents;
+          topRadio[index].color;
+          topId = topRadio[index].value;
+        });
+      },
     );
   }
 
-  SizedBox _widgetSizedTextBoxBottom(BuildContext context, isFirst, radioInfo) {
-    return SizedBox(
+  SizedBox _widgetSizedTextBox(BuildContext context, isTop, radioId) {
+    return isTop ? SizedBox(
       width: MediaQuery.of(context).size.width / textButtonWidth,
       height: MediaQuery.of(context).size.height / textButtonHeight,
-      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioInfo,)
+      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioId)
+    ) : SizedBox(
+      width: MediaQuery.of(context).size.width / textButtonWidth,
+      height: MediaQuery.of(context).size.height / textButtonHeight,
+      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioId)
     );
   }
 }
