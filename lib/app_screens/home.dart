@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:yein_design_app/data/radio_data.dart';
 import 'package:yein_design_app/model/radio_style.dart';
 import 'package:yein_design_app/provider/radio_style_provider.dart';
 import 'package:yein_design_app/shared/style.dart';
@@ -18,7 +17,6 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   List<RadioStyle> topRadio = [];
   List<RadioStyle> bottomRadio = [];
-  RadioStyle _checkTopRadio = DUMMY_STYLE.first;
 
   int topId = 1;
   int bottomId = 1;
