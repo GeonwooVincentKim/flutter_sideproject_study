@@ -51,6 +51,7 @@ class _PageAState extends State<PageA> {
         backgroundColor: CupertinoColors.black
       ),
       body: Container(
+        padding: paddingSymmetricBig,
         color: topButton[topId].color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -59,66 +60,51 @@ class _PageAState extends State<PageA> {
             Row(
               children: [
                 _widgetSizedTextBox(context, true, topId),
-                // _widgetCustomRadioTop(0),
-                Radio(
-                  value: topButton[0].value,
-                  groupValue: topId,
-                  onChanged: (value) {},
-                ),
+                _widgetCustomRadioDefault(0),
                 Text(topButton[0].contents),
                 
-                // _widgetCustomRadioTop(1),
-                Radio(
-                  value: topButton[1].value,
-                  groupValue: topId,
-                  onChanged: (value) {},
-                ),
+                _widgetCustomRadioDefault(1),
                 Text(topButton[1].contents)
               ],
             ),
-            // const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
-            // Row(
-            //   children: [
-            //     _widgetSizedTextBox(context, true, bottomId),
-            //     _widgetCustomRadioBottom(0),
-            //     Text(bottomRadio[0].contents,),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
+            Row(
+              children: [
+                _widgetSizedTextBox(context, false, bottomId),
+                _widgetCustomRadioBottom(0),
+                Text(bottomButton[0].contents,),
                 
-            //     _widgetCustomRadioBottom(1),
-            //     Text(bottomRadio[1].contents,)
-            //   ],
-            // ),
+                _widgetCustomRadioBottom(1),
+                Text(bottomButton[1].contents,)
+              ],
+            ),
           ],
         )
       ),
     );
   }
-  // Radio<int> _widgetCustomRadioBottom(index) {
-  //   return Radio(
-  //     value: bottomRadio[index].value,
-  //     groupValue: bottomId,
-  //     onChanged: (value) {
-  //       setState(() {
-  //         bottomRadio[index].contents;
-  //         bottomRadio[index].color;
-  //         bottomId = bottomRadio[index].value;
-  //       });
-  //     },
-  //   );
-  // }
 
-  // Radio<int> _widgetCustomRadioTop(index) {
-  //   return Radio(
-  //     value: topRadio[index].value,
-  //     groupValue: topId,
-  //     onChanged: (value) {
-  //       setState(() {
-  //         topRadio[index].contents;
-  //         topRadio[index].color;
-  //         topId = topRadio[index].value;
-  //       });
-  //     },
-  //   );
-  // }
+  Radio<int> _widgetCustomRadioDefault(index) {
+    return Radio(
+      value: topButton[index].value,
+      groupValue: topId,
+      onChanged: (value) {},
+    );
+  }
+
+  Radio<int> _widgetCustomRadioBottom(index) {
+    return Radio(
+      value: bottomButton[index].value,
+      groupValue: bottomId,
+      onChanged: (value) {
+        setState(() {
+          bottomButton[index].contents;
+          bottomButton[index].color;
+          bottomId = bottomButton[index].value;
+        });
+      },
+    );
+  }
 
   SizedBox _widgetSizedTextBox(BuildContext context, isTop, radioId) {
     return isTop ? SizedBox(

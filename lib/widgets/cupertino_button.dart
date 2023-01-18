@@ -20,7 +20,7 @@ class CustomCupertinoButton extends StatelessWidget {
       onPressed: () async => Navigator.of(context).pushNamed(routerName, arguments: getCurrentStyle),
       child: Text(getTitleText),
     ) : CupertinoButton(
-      color: blue,
+      color: grey,
       padding: paddingSymmetricSmall,
       onPressed: () {},
       child: Text(getTitleText),

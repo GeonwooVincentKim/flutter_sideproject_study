@@ -19,6 +19,7 @@ const Color indigoAccent = Color.fromARGB(255, 83, 109, 254);
 
 const Color transparentColor = Colors.transparent;
 const Color black87 = Color.fromARGB(221, 0, 0, 0);
+const Color grey = Colors.grey;
 const Color white70 = Color.fromARGB(179, 255, 255, 255);
 
 // Page Name

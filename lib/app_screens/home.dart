@@ -31,7 +31,6 @@ class _HomeState extends State<Home> {
     super.initState();
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -64,10 +63,10 @@ class _HomeState extends State<Home> {
               children: [
                 _widgetSizedTextBox(context, false, bottomId),
                 _widgetCustomRadioBottom(0),
-                Text(bottomRadio[0].contents,),
+                Text(bottomRadio[0].contents),
                 
                 _widgetCustomRadioBottom(1),
-                Text(bottomRadio[1].contents,)
+                Text(bottomRadio[1].contents)
               ],
             ),
           ],

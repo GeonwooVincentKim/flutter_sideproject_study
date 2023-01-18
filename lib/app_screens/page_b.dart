@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:yein_design_app/model/radio_style.dart';
 import 'package:yein_design_app/provider/radio_style_provider.dart';
+import 'package:yein_design_app/shared/style.dart';
+import 'package:yein_design_app/widgets/cupertino_button.dart';
 
 class PageB extends StatefulWidget {
   final String pageId;
@@ -15,6 +17,8 @@ class PageB extends StatefulWidget {
 class _PageBState extends State<PageB> {
   List<RadioStyle> topButton = [];
   List<RadioStyle> bottomButton = [];
+
+  late int topId;
   late int bottomId;
   
   @override
@@ -29,6 +33,7 @@ class _PageBState extends State<PageB> {
 
   @override
   void didChangeDependencies() {
+    topId = ModalRoute.of(context)!.settings.arguments as int;
     bottomId = ModalRoute.of(context)!.settings.arguments as int;
     super.didChangeDependencies();
   }
@@ -41,8 +46,70 @@ class _PageBState extends State<PageB> {
         backgroundColor: CupertinoColors.black
       ),
       body: Container(
-        color: topButton[bottomId].color
+        padding: paddingSymmetricBig,
+        color: bottomButton[bottomId].color,
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Row(
+              children: [
+                _widgetSizedTextBox(context, false, topId),
+                _widgetCustomRadioBottom(0),
+                Text(topButton[0].contents),
+                
+                _widgetCustomRadioBottom(1),
+                Text(topButton[1].contents)
+              ],
+            ),
+            const Padding(padding: EdgeInsets.symmetric(vertical: 30)),
+            Row(
+              children: [
+                _widgetSizedTextBox(context, true, bottomId),
+                _widgetCustomRadioDefault(0),
+                Text(bottomButton[0].contents,),
+                
+                _widgetCustomRadioDefault(1),
+                Text(bottomButton[1].contents,)
+              ],
+            ),
+          ],
+        )
       ),
+    );
+  }
+
+  Radio<int> _widgetCustomRadioDefault(index) {
+    return Radio(
+      value: bottomButton[index].value,
+      groupValue: bottomId,
+      onChanged: (value) {},
+    );
+  }
+
+  Radio<int> _widgetCustomRadioBottom(index) {
+    return Radio(
+      value: topButton[index].value,
+      groupValue: topId,
+      onChanged: (value) {
+        setState(() {
+          topButton[index].contents;
+          topButton[index].color;
+          topId = topButton[index].value;
+        });
+      },
+    );
+  }
+
+  SizedBox _widgetSizedTextBox(BuildContext context, isClickable, radioId) {
+    return isClickable ? SizedBox(
+      width: MediaQuery.of(context).size.width / textButtonWidth,
+      height: MediaQuery.of(context).size.height / textButtonHeight,
+      child: CustomCupertinoButton(getTitleText: getTitleText[2], routerName: "/pageB", getCurrentStyle: radioId, isCurrentPage: true)
+    ) : SizedBox(
+      width: MediaQuery.of(context).size.width / textButtonWidth,
+      height: MediaQuery.of(context).size.height / textButtonHeight,
+      child: CustomCupertinoButton(getTitleText: getTitleText[1], routerName: "/pageA", getCurrentStyle: radioId, isCurrentPage: false)
     );
   }
 }
