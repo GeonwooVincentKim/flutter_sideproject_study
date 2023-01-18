@@ -18,8 +18,9 @@ class _PageBState extends State<PageB> {
   List<RadioStyle> topButton = [];
   List<RadioStyle> bottomButton = [];
 
-  late int topId;
-  late int bottomId;
+  // late int? topId;
+  int topId = 0;
+  late int? bottomId;
   
   @override
   void initState() {
@@ -33,9 +34,10 @@ class _PageBState extends State<PageB> {
 
   @override
   void didChangeDependencies() {
-    topId = ModalRoute.of(context)!.settings.arguments as int;
-    bottomId = ModalRoute.of(context)!.settings.arguments as int;
     super.didChangeDependencies();
+
+    // topId = ModalRoute.of(context)!.settings.arguments as int;
+    bottomId = ModalRoute.of(context)!.settings.arguments as int;
   }
 
   @override
@@ -47,7 +49,8 @@ class _PageBState extends State<PageB> {
       ),
       body: Container(
         padding: paddingSymmetricBig,
-        color: bottomButton[bottomId].color,
+        // color: bottomId == bottomButton[bottomId!].color ? Colors.red : Colors.green,
+        color: bottomButton[bottomId!].color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -93,9 +96,7 @@ class _PageBState extends State<PageB> {
       groupValue: topId,
       onChanged: (value) {
         setState(() {
-          topButton[index].contents;
-          topButton[index].color;
-          topId = topButton[index].value;
+          topId = value!;
         });
       },
     );

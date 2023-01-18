@@ -18,8 +18,8 @@ class _HomeState extends State<Home> {
   List<RadioStyle> topRadio = [];
   List<RadioStyle> bottomRadio = [];
 
-  int topId = 1;
-  int bottomId = 1;
+  int topId = 0;
+  int bottomId = 0;
 
   @override
   void initState() {
@@ -29,6 +29,12 @@ class _HomeState extends State<Home> {
     });
 
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    // print(ModalRoute.of(context)!.settings.arguments as int);
+    super.didChangeDependencies();
   }
 
   @override
@@ -81,9 +87,11 @@ class _HomeState extends State<Home> {
       groupValue: bottomId,
       onChanged: (value) {
         setState(() {
-          bottomRadio[index].contents;
-          bottomRadio[index].color;
-          bottomId = bottomRadio[index].value;
+          bottomId = value!;
+          print("Bottom ID (Main) -> $bottomId");
+          // bottomRadio[index].contents;
+          // bottomRadio[index].color;
+          // bottomId = bottomRadio[index].value;
         });
       },
     );
@@ -95,9 +103,10 @@ class _HomeState extends State<Home> {
       groupValue: topId,
       onChanged: (value) {
         setState(() {
-          topRadio[index].contents;
-          topRadio[index].color;
-          topId = topRadio[index].value;
+          topId = value!;
+          // topRadio[index].contents;
+          // topRadio[index].color;
+          // topId = topRadio[index].value;
         });
       },
     );

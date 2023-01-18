@@ -18,8 +18,9 @@ class _PageAState extends State<PageA> {
   List<RadioStyle> topButton = [];
   List<RadioStyle> bottomButton = [];
   
-  late int topId;
-  late int bottomId;
+  late int? topId;
+  int bottomId = 0;
+  // late int? bottomId;
 
   @override
   void initState() {
@@ -33,26 +34,22 @@ class _PageAState extends State<PageA> {
 
   @override
   void didChangeDependencies() {
-    // topButton = ModalRoute.of(context)!.settings.arguments as List<RadioStyle>;
-    // _checkTopRadio = ModalRoute.of(context)!.settings.arguments as RadioStyle;
-    topId = ModalRoute.of(context)!.settings.arguments as int;
-    bottomId = ModalRoute.of(context)!.settings.arguments as int;
-
     super.didChangeDependencies();
+
+    topId = ModalRoute.of(context)!.settings.arguments as int;
+    // bottomId = ModalRoute.of(context)!.settings.arguments as int;
   }
 
   @override
   Widget build(BuildContext context) {
-    // final getRadioStyle = ModalRoute.of(context)!.settings.arguments as PageA;
-
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.pageId, textAlign: TextAlign.center, style: const TextStyle(color: CupertinoColors.white, fontSize: 25)),
-        backgroundColor: CupertinoColors.black
+        backgroundColor: CupertinoColors.black,
       ),
       body: Container(
         padding: paddingSymmetricBig,
-        color: topButton[topId].color,
+        color: topButton[topId!].color,
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
@@ -98,9 +95,10 @@ class _PageAState extends State<PageA> {
       groupValue: bottomId,
       onChanged: (value) {
         setState(() {
-          bottomButton[index].contents;
-          bottomButton[index].color;
-          bottomId = bottomButton[index].value;
+          bottomId = value!;
+          // bottomButton[index].contents;
+          // bottomButton[index].color;
+          // bottomId = bottomButton[index].value;
         });
       },
     );
